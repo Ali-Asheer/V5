@@ -1,0 +1,205 @@
+
+
+/* 
+
+1a Visa två skämt samtidigt
+
+1b Visa två skämt samtidigt, men se till att det inte kan bli samma skämt
+
+2 Varje skämt innehåller både en fråga och ett svar. Gör om listan, så att den innehåller objekt i stället för strängar. Varje objekt ska ha egenskaperna: id, question, answer. (id ska vara ett tal, börja räkna från 0 och öka 1 för varje objekt) Använd det för att ändra utskriften:
+*/
+
+const programmingJokes = [
+    {
+    id:0,
+    question:"Why don't programmers like nature?",
+    answer:"It has too many bugs.",
+    },{
+    id:1,
+    question:"Why did the CSS developer go to therapy?",
+    answer:"To get rid of his margins.",
+    },{
+    id:2,
+    question:"How do you comfort a JavaScript developer?",
+    answer:"You console them.",
+    },{
+    id:3,
+    question:"Why did the CSS developer leave the restaurant?",
+    answer:"Because it had no class.",
+    },{
+    id:4,
+    question:"Why did the JavaScript developer go missing?",
+    answer:"Because he didn't know when to return.",
+    },{
+    id:5,
+    question:"Why did the HTML tag go to the party?",
+    answer:"Because it wanted to break the line.",
+    },{
+    id:6,
+    question:"Why do JavaScript developers wear glasses?",
+    answer:"Because they don't C#.",
+    },{
+    id:7,
+    question:"Why don't programmers like to use inline styles?",
+    answer:"Because they want to be classy.",
+    },{
+    id:8,
+    question:"Why did the CSS selector break up with the HTML element?",
+    answer:"It found someone more specific.",
+    },{
+    id:9,
+    question:"Why did the CSS developer apply for a job?",
+    answer:"They wanted to get a position."
+    }
+];
+
+
+let ll = (programmingJokes.length);
+function getRandomInt() {
+  return (Math.floor(Math.random() * ll));
+ };
+
+let ran1= getRandomInt(); 
+let ran2= getRandomInt();
+while (ran1==ran2) { ran2=getRandomInt();
+  };
+
+  function print() {
+
+console.log("############################");
+console.log("Welcome to the joke factory!");
+console.log("Let me tell you something about programming"+'\n'+'\n');
+console.log('Joke #'+((programmingJokes[ran1].id)+1));
+console.log('> '+programmingJokes[ran1].question +' '+programmingJokes[ran1].answer +'\n');
+console.log('Joke #'+((programmingJokes[ran2].id)+1));
+console.log('> '+programmingJokes[ran2].question +' '+programmingJokes[ran2].answer+'\n'+'\n');
+console.log('Thank you, come again!');
+};
+print()
+
+
+/* ----------------------------------------------------------------------------------------------------------
+3 (svår) För denna uppgift behöver du använda Node.js i VS Code. Gör först så att programmet kan ta emot input från användaren. Du behöver skapa ett npm-projekt:
+*/
+
+import readline from 'node:readline/promises';
+const programmingJokes = [
+  {
+    id: 0,
+    question: "Why don't programmers like nature?",
+    answer: 'It has too many bugs.',
+  },
+  {
+    id: 1,
+    question: 'Why did the CSS developer go to therapy?',
+    answer: 'To get rid of his margins.',
+  },
+  {
+    id: 2,
+    question: 'How do you comfort a JavaScript developer?',
+    answer: 'You console them.',
+  },
+  {
+    id: 3,
+    question: 'Why did the CSS developer leave the restaurant?',
+    answer: 'Because it had no class.',
+  },
+  {
+    id: 4,
+    question: 'Why did the JavaScript developer go missing?',
+    answer: "Because he didn't know when to return.",
+  },
+  {
+    id: 5,
+    question: 'Why did the HTML tag go to the party?',
+    answer: 'Because it wanted to break the line.',
+  },
+  {
+    id: 6,
+    question: 'Why do JavaScript developers wear glasses?',
+    answer: "Because they don't C#.",
+  },
+  {
+    id: 7,
+    question: "Why don't programmers like to use inline styles?",
+    answer: 'Because they want to be classy.',
+  },
+  {
+    id: 8,
+    question: 'Why did the CSS selector break up with the HTML element?',
+    answer: 'It found someone more specific.',
+  },
+  {
+    id: 9,
+    question: 'Why did the CSS developer apply for a job?',
+    answer: 'They wanted to get a position.',
+  },
+];
+
+let antal=2;
+const ran = [];
+
+let ll = programmingJokes.length;
+
+function getRandomInt() {
+  return Math.floor(Math.random() * ll);
+}
+
+function compare() {
+	for (let j = 0; j < antal; j++) {
+	  for (let k = 1; k < j; k++) {
+		if (ran[j] === ran[k]) {
+		  ran[j] = getRandomInt();
+		  compare();
+		}
+	  }
+	}
+  }
+
+  function print(antal) {
+	for (let i = 0; i < antal; i++) {
+	  ran[i] = getRandomInt();
+	}
+  
+	compare();
+
+  console.log('############################');
+  console.log('Welcome to the joke factory!');
+  console.log('Let me tell you something about programming' + '\n' + '\n');
+
+  for (let i=0 ; i < antal ; i++ ){
+	console.log('Joke #' + (i + 1));
+	console.log('> ' + programmingJokes[ran[i]].question + ' ' + programmingJokes[ran[i]].answer + '\n') 
+}   
+}
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+async function yesno() {
+  const answer = await rl.question('Do you want another joke? (Y/N)');
+  if (answer.toLowerCase() === 'y') {	
+	let input = await rl.question('How many jokes do you want? max '+ll+' ')
+		input = Number(input)
+		if( isNaN(input) ) {
+		console.log('Please write a number, try again...')
+		}
+		antal=input;
+	print(antal);
+};
+if (answer.toLowerCase() === 'n') {
+	console.log('---------- Thank you, come again!.. ----------');
+	rl.close();
+  } else {
+	return yesno();
+  }}
+
+print(antal);
+let answer = await yesno();
+rl.close();
+
+
+
+
+
